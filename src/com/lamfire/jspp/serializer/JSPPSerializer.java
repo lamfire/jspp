@@ -1,7 +1,7 @@
 package com.lamfire.jspp.serializer;
 
 import com.lamfire.json.JSON;
-import com.lamfire.json.JSONObject;
+import com.lamfire.json.JSON;
 import com.lamfire.jspp.*;
 import com.lamfire.logger.Logger;
 
@@ -78,22 +78,22 @@ public class JSPPSerializer implements Serializer {
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
         }
-        JSON json = new JSON(js);
-        JSONObject jspp = (JSONObject)json.get(JSPP.JSPP_TYPE_PREFIX_MESSAGE);
+        JSON json = JSON.fromJSONString(js);
+        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_MESSAGE);
         if(jspp != null){
             MESSAGE m = new MESSAGE();
             m.putAll(jspp);
             return m;
         }
 
-        jspp = (JSONObject)json.get(JSPP.JSPP_TYPE_PREFIX_IQ);
+        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_IQ);
         if(jspp != null){
             IQ m = new IQ();
             m.putAll(jspp);
             return m;
         }
 
-        jspp = (JSONObject)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
+        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
         if(jspp != null){
             PRESENCE m = new PRESENCE();
             m.putAll(jspp);
@@ -108,8 +108,8 @@ public class JSPPSerializer implements Serializer {
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
         }
-        JSON json = new JSON(js);
-        JSONObject jspp = (JSONObject)json.get(JSPP.JSPP_TYPE_PREFIX_IQ);
+        JSON json = JSON.fromJSONString(js);
+        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_IQ);
         if(jspp == null){
             return null;
         }
@@ -124,8 +124,8 @@ public class JSPPSerializer implements Serializer {
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
         }
-        JSON json = new JSON(js);
-        JSONObject jspp = (JSONObject)json.get(JSPP.JSPP_TYPE_PREFIX_MESSAGE);
+        JSON json = JSON.fromJSONString(js);
+        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_MESSAGE);
         if(jspp == null){
             return null;
         }
@@ -140,8 +140,8 @@ public class JSPPSerializer implements Serializer {
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
         }
-        JSON json = new JSON(js);
-        JSONObject jspp = (JSONObject)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
+        JSON json = JSON.fromJSONString(js);
+        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
         if(jspp == null){
             return null;
         }
@@ -153,24 +153,24 @@ public class JSPPSerializer implements Serializer {
 
     public ProtocolType getProtocolType(byte[] bytes) {
         String js = new String(bytes);
-        JSON json = new JSON(js);
+        JSON json = JSON.fromJSONString(js);
         return getProtocolType(json);
     }
 
     public ProtocolType getProtocolType(String json) {
-        return getProtocolType(new JSON(json));
+        return getProtocolType(JSON.fromJSONString(json));
     }
 
     public ProtocolType getProtocolType(JSON json) {
-        JSONObject jspp = (JSONObject)json.get(JSPP.JSPP_TYPE_PREFIX_MESSAGE);
+        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_MESSAGE);
         if(jspp != null){
             return ProtocolType.MESSAGE;
         }
-        jspp = (JSONObject)json.get(JSPP.JSPP_TYPE_PREFIX_IQ);
+        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_IQ);
         if(jspp != null){
             return ProtocolType.IQ;
         }
-        jspp = (JSONObject)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
+        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
         if(jspp != null){
             return ProtocolType.PRESENCE;
         }
