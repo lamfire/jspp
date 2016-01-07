@@ -1,5 +1,7 @@
 package com.lamfire.jspp;
 
+import com.lamfire.json.JSON;
+
 import java.util.Map;
 
 /**
@@ -33,5 +35,11 @@ public class MESSAGE extends JSPP{
     public void setAttach(ATTACH attach) {
         this.attach = attach;
         put("attach",attach);
+    }
+
+    public String toString(){
+        JSON json = new JSON();
+        json.put(JSPP_TYPE_PREFIX_MESSAGE,this);
+        return json.toJSONString();
     }
 }

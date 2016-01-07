@@ -1,5 +1,7 @@
 package com.lamfire.jspp;
 
+import com.lamfire.json.JSON;
+
 import java.util.Map;
 
 /**
@@ -68,5 +70,11 @@ public class SERVICE extends JSPP{
     public void setResult(RESULT result) {
         this.result = result;
         put("result",result);
+    }
+
+    public String toString(){
+        JSON json = new JSON();
+        json.put(JSPP_TYPE_PREFIX_SERVICE,this);
+        return json.toJSONString();
     }
 }

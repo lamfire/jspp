@@ -1,5 +1,7 @@
 package com.lamfire.jspp;
 
+import com.lamfire.json.JSON;
+
 /**
  * JSPP DISCOVERY
  * User: lamfire
@@ -27,5 +29,11 @@ public class DISCOVERY extends JSPP{
 
     public void setStatus(String status) {
         put("status",status);
+    }
+
+    public String toString(){
+        JSON json = new JSON();
+        json.put(JSPP_TYPE_PREFIX_DISCOVERY,this);
+        return json.toJSONString();
     }
 }

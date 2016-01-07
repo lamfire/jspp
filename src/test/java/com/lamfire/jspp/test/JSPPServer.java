@@ -30,7 +30,7 @@ public class JSPPServer implements MessageReceivedListener {
     public void onMessageReceived(Session session, Message message) {
         //解码JSPP消息
         JSPP jspp = PacketUtils.decode(message.content());
-        System.out.println("[RECEIVED]:"+ PacketUtils.getProtocolType(jspp)  + ":" +jspp.toJSONString());
+        System.out.println("[RECEIVED]:"+ PacketUtils.getProtocolType(jspp)  + ":" +jspp);
 
 
         DISCOVERY res = new DISCOVERY();
