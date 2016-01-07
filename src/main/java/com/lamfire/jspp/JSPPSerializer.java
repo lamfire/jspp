@@ -73,7 +73,7 @@ class JSPPSerializer implements Serializer {
 
 
     public JSPP decode(byte[] bytes) {
-        String js = new String(bytes);
+        String js = new String(bytes,CHARSET);
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
         }
@@ -103,7 +103,7 @@ class JSPPSerializer implements Serializer {
 
 
     public SERVICE decodeSERVICE(byte[] bytes) {
-        String js = new String(bytes);
+        String js = new String(bytes,CHARSET);
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
         }
@@ -119,7 +119,7 @@ class JSPPSerializer implements Serializer {
 
 
     public MESSAGE decodeMESSAGE(byte[] bytes) {
-        String js = new String(bytes);
+        String js = new String(bytes,CHARSET);
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
         }
@@ -135,7 +135,7 @@ class JSPPSerializer implements Serializer {
 
 
     public DISCOVERY decodePRESENCE(byte[] bytes) {
-        String js = new String(bytes);
+        String js = new String(bytes,CHARSET);
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
         }
@@ -151,7 +151,7 @@ class JSPPSerializer implements Serializer {
 
 
     public ProtocolType getProtocolType(byte[] bytes) {
-        String js = new String(bytes);
+        String js = new String(bytes,CHARSET);
         JSON json = JSON.fromJSONString(js);
         return getProtocolType(json);
     }
