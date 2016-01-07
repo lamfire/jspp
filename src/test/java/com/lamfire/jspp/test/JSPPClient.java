@@ -4,8 +4,8 @@ import com.lamfire.hydra.Message;
 import com.lamfire.hydra.reply.Future;
 import com.lamfire.hydra.reply.ReplySnake;
 import com.lamfire.jspp.ATTACH;
+import com.lamfire.jspp.JSPPUtils;
 import com.lamfire.jspp.MESSAGE;
-import com.lamfire.jspp.PacketUtils;
 
 /**
  * 一个简单的JSPP客户端
@@ -45,7 +45,7 @@ public class JSPPClient {
             m.put("iid",count);
 
             //发送消息
-            Future future = snake.send(PacketUtils.encode(m)) ;
+            Future future = snake.send(JSPPUtils.encode(m)) ;
             //获得响应数据
             Message message = future.getResponse();
 

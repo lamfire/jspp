@@ -12,8 +12,8 @@ import com.lamfire.logger.Logger;
  * Time: 下午4:48
  * To change this template use File | Settings | File Templates.
  */
-public class PacketUtils {
-    private static final Logger LOGGER = Logger.getLogger(PacketUtils.class);
+public class JSPPUtils {
+    private static final Logger LOGGER = Logger.getLogger(JSPPUtils.class);
 
     public static JSPP decode(byte[] message) {
         if(message == null){
