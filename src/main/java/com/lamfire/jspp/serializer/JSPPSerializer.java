@@ -160,7 +160,38 @@ public class JSPPSerializer implements Serializer {
         return getProtocolType(JSON.fromJSONString(json));
     }
 
+    public ProtocolType getProtocolType(JSPP jspp) {
+        if(jspp instanceof  MESSAGE){
+            return ProtocolType.MESSAGE;
+        }else if(jspp instanceof DISCOVERY){
+            return ProtocolType.DISCOVERY;
+        }else if(jspp instanceof SERVICE){
+            return ProtocolType.SERVICE;
+        }
+        return null;
+    }
+
+    public ProtocolType getProtocolType(MESSAGE jspp) {
+         return ProtocolType.MESSAGE;
+    }
+
+    public ProtocolType getProtocolType(DISCOVERY jspp) {
+         return ProtocolType.DISCOVERY;
+    }
+
+    public ProtocolType getProtocolType(SERVICE jspp) {
+        return ProtocolType.SERVICE;
+    }
+
     public ProtocolType getProtocolType(JSON json) {
+        if(json instanceof  MESSAGE){
+            return ProtocolType.MESSAGE;
+        }else if(json instanceof DISCOVERY){
+            return ProtocolType.DISCOVERY;
+        }else if(json instanceof SERVICE){
+            return ProtocolType.SERVICE;
+        }
+
         JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_MESSAGE);
         if(jspp != null){
             return ProtocolType.MESSAGE;
