@@ -1,7 +1,6 @@
 package com.lamfire.jspp.serializer;
 
 import com.lamfire.json.JSON;
-import com.lamfire.json.JSON;
 import com.lamfire.jspp.*;
 import com.lamfire.logger.Logger;
 
@@ -28,20 +27,20 @@ public class JSPPSerializer implements Serializer {
             return encodeMESSAGE((MESSAGE)jspp);
         }
 
-        if(jspp instanceof IQ){
-            return encodeIQ((IQ)jspp);
+        if(jspp instanceof SERVICE){
+            return encodeIQ((SERVICE)jspp);
         }
 
-        if(jspp instanceof PRESENCE){
-            return encodePRESENCE((PRESENCE)jspp);
+        if(jspp instanceof DISCOVERY){
+            return encodeDISCOVERY((DISCOVERY) jspp);
         }
         return null;
     }
 
 
-    public byte[] encodeIQ(IQ iq) {
+    public byte[] encodeIQ(SERVICE service) {
         JSON json = new JSON();
-        json.put(JSPP.JSPP_TYPE_PREFIX_IQ,iq);
+        json.put(JSPP.JSPP_TYPE_PREFIX_SERVICE,service);
         String js = json.toJSONString();
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[ENCODE]:" +js);
@@ -62,9 +61,9 @@ public class JSPPSerializer implements Serializer {
     }
 
 
-    public byte[] encodePRESENCE(PRESENCE presence) {
+    public byte[] encodeDISCOVERY(DISCOVERY discovery) {
         JSON json = new JSON();
-        json.put(JSPP.JSPP_TYPE_PREFIX_PRESENCE,presence);
+        json.put(JSPP.JSPP_TYPE_PREFIX_DISCOVERY,discovery);
         String js = json.toJSONString();
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[ENCODE]:" +js);
@@ -86,16 +85,16 @@ public class JSPPSerializer implements Serializer {
             return m;
         }
 
-        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_IQ);
+        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_SERVICE);
         if(jspp != null){
-            IQ m = new IQ();
+            SERVICE m = new SERVICE();
             m.putAll(jspp);
             return m;
         }
 
-        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
+        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_DISCOVERY);
         if(jspp != null){
-            PRESENCE m = new PRESENCE();
+            DISCOVERY m = new DISCOVERY();
             m.putAll(jspp);
             return m;
         }
@@ -103,17 +102,17 @@ public class JSPPSerializer implements Serializer {
     }
 
 
-    public IQ decodeIQ(byte[] bytes) {
+    public SERVICE decodeSERVICE(byte[] bytes) {
         String js = new String(bytes);
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
         }
         JSON json = JSON.fromJSONString(js);
-        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_IQ);
+        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_SERVICE);
         if(jspp == null){
             return null;
         }
-        IQ m = new IQ();
+        SERVICE m = new SERVICE();
         m.putAll(jspp);
         return m;
     }
@@ -135,17 +134,17 @@ public class JSPPSerializer implements Serializer {
     }
 
 
-    public PRESENCE decodePRESENCE(byte[] bytes) {
+    public DISCOVERY decodePRESENCE(byte[] bytes) {
         String js = new String(bytes);
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
         }
         JSON json = JSON.fromJSONString(js);
-        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
+        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_DISCOVERY);
         if(jspp == null){
             return null;
         }
-        PRESENCE m = new PRESENCE();
+        DISCOVERY m = new DISCOVERY();
         m.putAll(jspp);
         return m;
     }
@@ -166,13 +165,13 @@ public class JSPPSerializer implements Serializer {
         if(jspp != null){
             return ProtocolType.MESSAGE;
         }
-        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_IQ);
+        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_SERVICE);
         if(jspp != null){
-            return ProtocolType.IQ;
+            return ProtocolType.SERVICE;
         }
-        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
+        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_DISCOVERY);
         if(jspp != null){
-            return ProtocolType.PRESENCE;
+            return ProtocolType.DISCOVERY;
         }
         return null;
     }

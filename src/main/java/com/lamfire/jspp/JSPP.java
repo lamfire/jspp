@@ -15,9 +15,9 @@ import java.util.Map;
  */
 public abstract class JSPP extends JSON {
     private static Serializer serializer = new JSPPSerializer();
-    public static final String JSPP_TYPE_PREFIX_IQ = "iq";
+    public static final String JSPP_TYPE_PREFIX_SERVICE = "service";
     public static final String JSPP_TYPE_PREFIX_MESSAGE = "message";
-    public static final String JSPP_TYPE_PREFIX_PRESENCE = "presence";
+    public static final String JSPP_TYPE_PREFIX_DISCOVERY = "discovery";
 
     private ERROR error;
 
@@ -85,12 +85,12 @@ public abstract class JSPP extends JSON {
             return ProtocolType.MESSAGE;
         }
 
-        if(jspp instanceof IQ){
-            return ProtocolType.IQ;
+        if(jspp instanceof SERVICE){
+            return ProtocolType.SERVICE;
         }
 
-        if(jspp instanceof PRESENCE){
-            return ProtocolType.PRESENCE;
+        if(jspp instanceof DISCOVERY){
+            return ProtocolType.DISCOVERY;
         }
         return null;
     }

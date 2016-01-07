@@ -5,7 +5,7 @@ import com.lamfire.json.JSON;
 import java.util.HashMap;
 
 /**
- * IQ RESULT
+ * SERVICE RESULT
  * User: lamfire
  * Date: 13-11-11
  * Time: 下午1:42

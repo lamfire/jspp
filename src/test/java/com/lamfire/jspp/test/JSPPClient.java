@@ -1,14 +1,9 @@
 package com.lamfire.jspp.test;
 
 import com.lamfire.hydra.Message;
-import com.lamfire.hydra.MessageContext;
-import com.lamfire.hydra.Snake;
-import com.lamfire.hydra.net.Session;
-import com.lamfire.hydra.reply.ReplyFuture;
+import com.lamfire.hydra.reply.Future;
 import com.lamfire.hydra.reply.ReplySnake;
 import com.lamfire.jspp.ATTACH;
-import com.lamfire.jspp.IQ;
-import com.lamfire.jspp.JSPP;
 import com.lamfire.jspp.MESSAGE;
 import com.lamfire.jspp.hydra.PacketUtils;
 
@@ -21,11 +16,10 @@ import com.lamfire.jspp.hydra.PacketUtils;
  */
 public class JSPPClient {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         //创建网络连接对象
-        ReplySnake snake = new ReplySnake("127.0.0.1",7100);
-        //建立连接
-        snake.connect();
+        ReplySnake snake = new ReplySnake();
+        snake.startup("127.0.0.1",7100);
 
         //创建JSPP消息
         MESSAGE m = new MESSAGE();
@@ -49,14 +43,15 @@ public class JSPPClient {
         while(true){
             //设置自定义属性
             m.put("iid",count);
+
             //发送消息
-            ReplyFuture future = snake.send(PacketUtils.encode(m)) ;
+            Future future = snake.send(PacketUtils.encode(m)) ;
             //获得响应数据
-            byte[] bytes = future.getReply();
+            Message message = future.getResponse();
 
             //每1000次输出一次响应数据及响应时间
             if((++count) % 1000 == 0){
-                System.out.println(count +" - " + new String(bytes) +" " + ( System.currentTimeMillis() - startAt) +"ms");
+                System.out.println(count +" - " + new String(message.content()) +" " + ( System.currentTimeMillis() - startAt) +"ms");
                 startAt = System.currentTimeMillis();
             }
         }

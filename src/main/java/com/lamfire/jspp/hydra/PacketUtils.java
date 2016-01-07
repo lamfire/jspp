@@ -2,13 +2,10 @@ package com.lamfire.jspp.hydra;
 
 
 import com.lamfire.hydra.Message;
-import com.lamfire.hydra.MessageContext;
-import com.lamfire.hydra.net.Session;
 import com.lamfire.json.JSON;
 import com.lamfire.jspp.*;
 import com.lamfire.jspp.serializer.JSPPSerializer;
 import com.lamfire.logger.Logger;
-import com.lamfire.utils.StringUtils;
 
 
 /**
@@ -21,39 +18,11 @@ import com.lamfire.utils.StringUtils;
 public class PacketUtils {
     private static final Logger LOGGER = Logger.getLogger(PacketUtils.class);
 
-    private static void send(Session session,int id,byte[] bytes){
-        Message m = new Message();
-        m.setId(id);
-        m.setBody(bytes);
-        session.send(m);
-        if(LOGGER.isDebugEnabled()){
-            LOGGER.debug("[SENDING]:"+new String(bytes));
-        }
-    }
-
-    public static void send(MessageContext context,JSPP jspp){
-        byte[] bytes = encode(jspp);
-        context.send(context.getMessage().getId(),bytes);
-    }
-
-    public static void send(Session session,int messageId,IQ iq){
-        send(session,messageId, encode(iq));
-    }
-
-    public static void send(Session session,int messageId,MESSAGE message){
-        send(session,messageId,encode(message));
-    }
-
-    public static void send(Session session,int messageId,PRESENCE presence){
-        send(session,messageId,encode(presence));
-    }
-
-
     public static JSPP decode(Message message) {
         if(message == null){
             return null;
         }
-        byte[] bytes = message.getBody();
+        byte[] bytes = message.content();
         if(bytes == null){
             return null;
         }

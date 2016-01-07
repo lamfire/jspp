@@ -3,13 +3,13 @@ package com.lamfire.jspp;
 import java.util.Map;
 
 /**
- * JSPP IQ
+ * JSPP SERVICE
  * User: lamfire
  * Date: 13-11-11
  * Time: 上午10:24
  * To change this template use File | Settings | File Templates.
  */
-public class IQ extends JSPP{
+public class SERVICE extends JSPP{
     public static final String TYPE_GET = "get";
     public static final String TYPE_SET = "set";
     public static final String TYPE_ERROR = "error";
