@@ -6,7 +6,8 @@
 
     <groupId>com.lamfire</groupId>
     <artifactId>jspp</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
+
     <dependencies>
         <dependency>
             <groupId>log4j</groupId>
