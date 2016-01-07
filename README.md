@@ -8,9 +8,9 @@ JSPP(JSON Messaging and Presence Protocol 基于JSON的通讯和表示协议)是
 CIRCE是一个即时消息和在线状态系统。是一个拥有开放JSPP协议的即时消息（IM）服务系统。本文档将对JSPP协议1.0进行介绍。
 
 在JSPP数据包中，circe包含三个顶级协义类型：
-1.message 	消息
-2.presence 	状态
-3.IQ      	信息/查询
+1.message 	    消息
+2.discovery 	发现
+3.service      	服务
 
 六个通用属性：
 1. "type"
