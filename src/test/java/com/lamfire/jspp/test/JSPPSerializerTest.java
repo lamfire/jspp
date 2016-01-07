@@ -1,11 +1,8 @@
 package com.lamfire.jspp.test;
 
-import com.lamfire.json.JSON;
 import com.lamfire.jspp.ATTACH;
-import com.lamfire.jspp.ERROR;
 import com.lamfire.jspp.JSPP;
 import com.lamfire.jspp.MESSAGE;
-import com.lamfire.jspp.serializer.JSPPSerializer;
 
 /**
  * 序列化及反序列化

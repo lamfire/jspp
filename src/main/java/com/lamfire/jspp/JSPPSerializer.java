@@ -1,4 +1,4 @@
-package com.lamfire.jspp.serializer;
+package com.lamfire.jspp;
 
 import com.lamfire.json.JSON;
 import com.lamfire.jspp.*;
@@ -13,7 +13,7 @@ import java.nio.charset.Charset;
  * Date: 14-2-13
  * Time: 下午5:07
  */
-public class JSPPSerializer implements Serializer {
+class JSPPSerializer implements Serializer {
     private static final Logger LOGGER = Logger.getLogger(JSPPSerializer.class);
     private final Charset CHARSET = Charset.forName("utf-8");
     private static final  JSPPSerializer SERIALIZER = new JSPPSerializer();
@@ -28,7 +28,7 @@ public class JSPPSerializer implements Serializer {
         }
 
         if(jspp instanceof SERVICE){
-            return encodeIQ((SERVICE)jspp);
+            return encodeSERVICE((SERVICE) jspp);
         }
 
         if(jspp instanceof DISCOVERY){
@@ -38,7 +38,7 @@ public class JSPPSerializer implements Serializer {
     }
 
 
-    public byte[] encodeIQ(SERVICE service) {
+    public byte[] encodeSERVICE(SERVICE service) {
         JSON json = new JSON();
         json.put(JSPP.JSPP_TYPE_PREFIX_SERVICE,service);
         String js = json.toJSONString();

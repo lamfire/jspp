@@ -3,7 +3,7 @@ package com.lamfire.jspp.test;
 import com.lamfire.hydra.*;
 import com.lamfire.jspp.DISCOVERY;
 import com.lamfire.jspp.JSPP;
-import com.lamfire.jspp.hydra.PacketUtils;
+import com.lamfire.jspp.PacketUtils;
 
 /**
  * 一个简单的JSPP服务器
@@ -29,7 +29,7 @@ public class JSPPServer implements MessageReceivedListener {
     @Override
     public void onMessageReceived(Session session, Message message) {
         //解码JSPP消息
-        JSPP jspp = PacketUtils.decode(message);
+        JSPP jspp = PacketUtils.decode(message.content());
         System.out.println("[RECEIVED]:"+ PacketUtils.getProtocolType(jspp)  + ":" +jspp.toJSONString());
 
 

@@ -1,8 +1,6 @@
 package com.lamfire.jspp;
 
 import com.lamfire.json.JSON;
-import com.lamfire.jspp.serializer.JSPPSerializer;
-import com.lamfire.jspp.serializer.Serializer;
 
 import java.util.Map;
 

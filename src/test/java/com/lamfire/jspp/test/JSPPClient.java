@@ -5,7 +5,7 @@ import com.lamfire.hydra.reply.Future;
 import com.lamfire.hydra.reply.ReplySnake;
 import com.lamfire.jspp.ATTACH;
 import com.lamfire.jspp.MESSAGE;
-import com.lamfire.jspp.hydra.PacketUtils;
+import com.lamfire.jspp.PacketUtils;
 
 /**
  * 一个简单的JSPP客户端

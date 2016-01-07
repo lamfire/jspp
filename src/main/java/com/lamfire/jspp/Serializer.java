@@ -1,4 +1,4 @@
-package com.lamfire.jspp.serializer;
+package com.lamfire.jspp;
 
 import com.lamfire.json.JSON;
 import com.lamfire.jspp.*;
@@ -9,7 +9,7 @@ import com.lamfire.jspp.*;
  * Date: 13-10-17
  * Time: 下午2:35
  */
-public interface Serializer{
+interface Serializer{
     public  byte[] encode(JSPP jspp);
     public JSPP decode(byte[] bytes);
     public ProtocolType getProtocolType(byte[] bytes);

@@ -1,10 +1,7 @@
-package com.lamfire.jspp.hydra;
+package com.lamfire.jspp;
 
 
-import com.lamfire.hydra.Message;
 import com.lamfire.json.JSON;
-import com.lamfire.jspp.*;
-import com.lamfire.jspp.serializer.JSPPSerializer;
 import com.lamfire.logger.Logger;
 
 
@@ -18,15 +15,11 @@ import com.lamfire.logger.Logger;
 public class PacketUtils {
     private static final Logger LOGGER = Logger.getLogger(PacketUtils.class);
 
-    public static JSPP decode(Message message) {
+    public static JSPP decode(byte[] message) {
         if(message == null){
             return null;
         }
-        byte[] bytes = message.content();
-        if(bytes == null){
-            return null;
-        }
-        return JSPPSerializer.get().decode(bytes);
+        return JSPPSerializer.get().decode(message);
     }
 
     public static byte[] encode(JSPP jspp){
