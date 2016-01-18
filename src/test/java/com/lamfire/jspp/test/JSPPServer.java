@@ -1,7 +1,7 @@
 package com.lamfire.jspp.test;
 
 import com.lamfire.hydra.*;
-import com.lamfire.jspp.DISCOVERY;
+import com.lamfire.jspp.PRESENCE;
 import com.lamfire.jspp.JSPP;
 import com.lamfire.jspp.JSPPUtils;
 
@@ -33,10 +33,10 @@ public class JSPPServer implements MessageReceivedListener {
         System.out.println("[RECEIVED]:"+ JSPPUtils.getProtocolType(jspp)  + ":" +jspp);
 
 
-        DISCOVERY res = new DISCOVERY();
+        PRESENCE res = new PRESENCE();
         res.setTo(jspp.getTo());
         res.setFrom(jspp.getFrom());
-        res.setType(DISCOVERY.TYPE_AVAILABLE);
+        res.setType(PRESENCE.TYPE_AVAILABLE);
 
         Message response = MessageFactory.message(message.header().id(),message.header().option(), JSPPUtils.encode(res));
 

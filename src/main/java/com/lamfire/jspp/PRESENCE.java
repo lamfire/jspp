@@ -3,13 +3,13 @@ package com.lamfire.jspp;
 import com.lamfire.json.JSON;
 
 /**
- * JSPP DISCOVERY
+ * JSPP PRESENCE
  * User: lamfire
  * Date: 13-11-11
  * Time: 上午10:24
  * To change this template use File | Settings | File Templates.
  */
-public class DISCOVERY extends JSPP{
+public class PRESENCE extends JSPP{
     public static final String TYPE_AVAILABLE = "available";
     public static final String TYPE_UNAVAILABLE = "unavailable";
     public static final String TYPE_ERROR = "error";
@@ -33,7 +33,7 @@ public class DISCOVERY extends JSPP{
 
     public String toString(){
         JSON json = new JSON();
-        json.put(JSPP_TYPE_PREFIX_DISCOVERY,this);
+        json.put(JSPP_TYPE_PREFIX_PRESENCE,this);
         return json.toJSONString();
     }
 }

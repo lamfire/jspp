@@ -18,11 +18,13 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>4.0.30.Final</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.lamfire</groupId>
             <artifactId>hydra</artifactId>
             <version>2.0.0</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.lamfire</groupId>

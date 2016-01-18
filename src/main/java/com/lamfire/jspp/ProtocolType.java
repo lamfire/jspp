@@ -8,5 +8,5 @@ package com.lamfire.jspp;
  * To change this template use File | Settings | File Templates.
  */
 public enum ProtocolType {
-    MESSAGE, DISCOVERY, SERVICE
+    MESSAGE, PRESENCE, SERVICE
 }

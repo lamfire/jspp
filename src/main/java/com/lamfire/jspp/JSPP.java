@@ -15,7 +15,7 @@ public abstract class JSPP extends JSON {
     private static Serializer serializer = new JSPPSerializer();
     public static final String JSPP_TYPE_PREFIX_SERVICE = "service";
     public static final String JSPP_TYPE_PREFIX_MESSAGE = "message";
-    public static final String JSPP_TYPE_PREFIX_DISCOVERY = "discovery";
+    public static final String JSPP_TYPE_PREFIX_PRESENCE = "presence";
 
     private ERROR error;
 
@@ -87,8 +87,8 @@ public abstract class JSPP extends JSON {
             return ProtocolType.SERVICE;
         }
 
-        if(jspp instanceof DISCOVERY){
-            return ProtocolType.DISCOVERY;
+        if(jspp instanceof PRESENCE){
+            return ProtocolType.PRESENCE;
         }
         return null;
     }

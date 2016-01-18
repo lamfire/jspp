@@ -1,7 +1,6 @@
 package com.lamfire.jspp;
 
 import com.lamfire.json.JSON;
-import com.lamfire.jspp.*;
 import com.lamfire.logger.Logger;
 
 import java.nio.charset.Charset;
@@ -31,8 +30,8 @@ class JSPPSerializer implements Serializer {
             return encodeSERVICE((SERVICE) jspp);
         }
 
-        if(jspp instanceof DISCOVERY){
-            return encodeDISCOVERY((DISCOVERY) jspp);
+        if(jspp instanceof PRESENCE){
+            return encodeDISCOVERY((PRESENCE) jspp);
         }
         return null;
     }
@@ -61,9 +60,9 @@ class JSPPSerializer implements Serializer {
     }
 
 
-    public byte[] encodeDISCOVERY(DISCOVERY discovery) {
+    public byte[] encodeDISCOVERY(PRESENCE discovery) {
         JSON json = new JSON();
-        json.put(JSPP.JSPP_TYPE_PREFIX_DISCOVERY,discovery);
+        json.put(JSPP.JSPP_TYPE_PREFIX_PRESENCE,discovery);
         String js = json.toJSONString();
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[ENCODE]:" +js);
@@ -92,9 +91,9 @@ class JSPPSerializer implements Serializer {
             return m;
         }
 
-        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_DISCOVERY);
+        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
         if(jspp != null){
-            DISCOVERY m = new DISCOVERY();
+            PRESENCE m = new PRESENCE();
             m.putAll(jspp);
             return m;
         }
@@ -134,17 +133,17 @@ class JSPPSerializer implements Serializer {
     }
 
 
-    public DISCOVERY decodePRESENCE(byte[] bytes) {
+    public PRESENCE decodePRESENCE(byte[] bytes) {
         String js = new String(bytes,CHARSET);
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
         }
         JSON json = JSON.fromJSONString(js);
-        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_DISCOVERY);
+        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
         if(jspp == null){
             return null;
         }
-        DISCOVERY m = new DISCOVERY();
+        PRESENCE m = new PRESENCE();
         m.putAll(jspp);
         return m;
     }
@@ -163,8 +162,8 @@ class JSPPSerializer implements Serializer {
     public ProtocolType getProtocolType(JSPP jspp) {
         if(jspp instanceof  MESSAGE){
             return ProtocolType.MESSAGE;
-        }else if(jspp instanceof DISCOVERY){
-            return ProtocolType.DISCOVERY;
+        }else if(jspp instanceof PRESENCE){
+            return ProtocolType.PRESENCE;
         }else if(jspp instanceof SERVICE){
             return ProtocolType.SERVICE;
         }
@@ -175,8 +174,8 @@ class JSPPSerializer implements Serializer {
          return ProtocolType.MESSAGE;
     }
 
-    public ProtocolType getProtocolType(DISCOVERY jspp) {
-         return ProtocolType.DISCOVERY;
+    public ProtocolType getProtocolType(PRESENCE jspp) {
+         return ProtocolType.PRESENCE;
     }
 
     public ProtocolType getProtocolType(SERVICE jspp) {
@@ -186,8 +185,8 @@ class JSPPSerializer implements Serializer {
     public ProtocolType getProtocolType(JSON json) {
         if(json instanceof  MESSAGE){
             return ProtocolType.MESSAGE;
-        }else if(json instanceof DISCOVERY){
-            return ProtocolType.DISCOVERY;
+        }else if(json instanceof PRESENCE){
+            return ProtocolType.PRESENCE;
         }else if(json instanceof SERVICE){
             return ProtocolType.SERVICE;
         }
@@ -200,9 +199,9 @@ class JSPPSerializer implements Serializer {
         if(jspp != null){
             return ProtocolType.SERVICE;
         }
-        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_DISCOVERY);
+        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
         if(jspp != null){
-            return ProtocolType.DISCOVERY;
+            return ProtocolType.PRESENCE;
         }
         return null;
     }
