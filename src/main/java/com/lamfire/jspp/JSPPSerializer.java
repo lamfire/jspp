@@ -23,21 +23,21 @@ class JSPPSerializer implements Serializer {
     @Override
     public byte[] encode(JSPP jspp) {
         if(jspp instanceof MESSAGE){
-            return encodeMESSAGE((MESSAGE)jspp);
+            return encodeMessage((MESSAGE)jspp);
         }
 
         if(jspp instanceof SERVICE){
-            return encodeSERVICE((SERVICE) jspp);
+            return encodeService((SERVICE) jspp);
         }
 
         if(jspp instanceof PRESENCE){
-            return encodeDISCOVERY((PRESENCE) jspp);
+            return encodePresence((PRESENCE) jspp);
         }
         return null;
     }
 
 
-    public byte[] encodeSERVICE(SERVICE service) {
+    public byte[] encodeService(SERVICE service) {
         JSON json = new JSON();
         json.put(JSPP.JSPP_TYPE_PREFIX_SERVICE,service);
         String js = json.toJSONString();
@@ -48,7 +48,7 @@ class JSPPSerializer implements Serializer {
     }
 
 
-    public byte[] encodeMESSAGE(MESSAGE message) {
+    public byte[] encodeMessage(MESSAGE message) {
         JSON json = new JSON();
         json.put(JSPP.JSPP_TYPE_PREFIX_MESSAGE,message);
 
@@ -60,9 +60,9 @@ class JSPPSerializer implements Serializer {
     }
 
 
-    public byte[] encodeDISCOVERY(PRESENCE discovery) {
+    public byte[] encodePresence(PRESENCE presence) {
         JSON json = new JSON();
-        json.put(JSPP.JSPP_TYPE_PREFIX_PRESENCE,discovery);
+        json.put(JSPP.JSPP_TYPE_PREFIX_PRESENCE,presence);
         String js = json.toJSONString();
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[ENCODE]:" +js);
@@ -101,7 +101,7 @@ class JSPPSerializer implements Serializer {
     }
 
 
-    public SERVICE decodeSERVICE(byte[] bytes) {
+    public SERVICE decodeService(byte[] bytes) {
         String js = new String(bytes,CHARSET);
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
@@ -117,7 +117,7 @@ class JSPPSerializer implements Serializer {
     }
 
 
-    public MESSAGE decodeMESSAGE(byte[] bytes) {
+    public MESSAGE decodeMessage(byte[] bytes) {
         String js = new String(bytes,CHARSET);
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
@@ -133,7 +133,7 @@ class JSPPSerializer implements Serializer {
     }
 
 
-    public PRESENCE decodePRESENCE(byte[] bytes) {
+    public PRESENCE decodePresence(byte[] bytes) {
         String js = new String(bytes,CHARSET);
         if(LOGGER.isDebugEnabled()){
             LOGGER.debug("[DECODE]:" +js);
