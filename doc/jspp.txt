@@ -232,7 +232,7 @@ status元素的可用值为：
 在SERVICE中的result子元素定义所执行的请求返回结果。
 
 下面是一个登陆请求所返回result例子:
-{service:{type="result",ns:"user.auth",args:{username:"lamfire",digest:"f1e881517e9917bb815fed112d81d32b4e4b3aed"},result:{id:"74Ed74362BA347653",nickname:"linfan"}}}
+{service:{type="result",ns:"user.auth",args:{username:"lamfire",digest:"f1e881517e9917bb815fed112d81d32b4e4b3aed"},result:{id:"74Ed74362BA347653",nickname:"linfan",avatar: "http://img.lamfire.com/1.jpg",token: "a1e881517e9812b6715fed112d81d4564b3a49",}}}
 
 
 5.4.    "type"属性
@@ -251,7 +251,7 @@ SERVICE属性的"type"属性用于决定信息/查询是请求还是响应等。
 5.4.2. type="get"
 请求一个"名称空间"的信息。"get"有一个"args"子属性来表示查询的条件。一次成功的查询请求将返回 type="result"结果集。
 例子：
-{service:{type="get",ns:"user.auth",args:{username:"lamfire",digest:"f1e881517e9917bb815fed112d81d32b4e4b3aed"}}}
+{service:{type="get",ns:"user",args:{id:"f1e881517e9917bb815fed112d81d32b4e4b3aed"}}}
 
 5.4.3. type="result"
 表示type="get"或type="set"IQ查询的成功响应。这个成功查询的结果是一个 type="result"的IQ元素，该元素嵌套在一个包含所查询的信息的args。
