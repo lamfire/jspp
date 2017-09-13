@@ -6,17 +6,17 @@ JSPP(JSON Messaging and Presence Protocol 基于JSON的通讯表示协议)是一
 
 
 在JSPP数据包中，包含三个顶级协义类型：
-1.MESSAGE 	消息
-2.PRESENCE 	存在
-3.SERVICE      	服务
+* 1.MESSAGE 	消息
+* 2.PRESENCE 	存在
+* 3.SERVICE     服务
 
 JSPP六个通用属性：
-1. "type"
-2. "from"
-3. "to"
-4. "id"
-5. "body"
-6. "error"
+* 1. "type"
+* 2. "from"
+* 3. "to"
+* 4. "id"
+* 5. "body"
+* 6. "error"
 注：每个顶级协义类型通过包含多个属性构成JSPP协议。
 
 
