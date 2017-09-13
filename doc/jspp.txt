@@ -22,10 +22,10 @@ JSPP六个通用属性：
 
 下面来个对话的简单例子：
 用户ID为12345发送消息给ID为54321的用户：
-{message:{from:"12345@s2.jspp.im",to:"54321@s1.jspp.im",body:"hello"}}
+{message:{from:"12345@lamfire.com",to:"54321@lamfire.com",body:"hello"}}
 
 ID为54321用户将接收到消息：
-{message:{from:"12345@s2.jspp.im",to:"54321@s1.jspp.im",body:"hello"}}
+{message:{from:"12345@lamfire.com",to:"54321@lamfire.com",body:"hello"}}
 
 3.MESSAGE协议详解
 MESSAGE协议是JSPP协义中三个顶级协义类型中的一个。它被定义为两个实体间互相发送消息内容的协议载体。
@@ -44,49 +44,49 @@ MESSAGE协议是JSPP协义中三个顶级协义类型中的一个。它被定义
 JSPP服务器支持几种不同的消息，这些消息通过type属性来进行区分。
 type属性的有效值包括：
 1.type=[default]:不设置type属性，本示本消息是一个普通消息.
-例如：{message:{to:"5284750@s1.jspp.im",body:"hello"}}
+例如：{message:{to:"5284750@lamfire.com",body:"hello"}}
 
 2.type="chat":表示消息为一个接一个的对话消息，一般显示在聊天对话界面上。
-例如：{message:{type:"chat",to:"5284750@s1.jspp.im",from:"123778@s2.jspp.im",body:"hello"}}
+例如：{message:{type:"chat",to:"5284750@lamfire.com",from:"123778@lamfire.com",body:"hello"}}
 
 3.type="groupchat":表示消息为群聊消息，一般显示在聊天室对话界面上。
-例如：{message:{type:"groupchat",to:"room1@s1.jspp.im",from:"123778@s2.jspp.im",body:"hello"}}
+例如：{message:{type:"groupchat",to:"room1@lamfire.com",from:"123778@lamfire.com",body:"hello"}}
 
 4.type="error":表示消息为一个错误。
-例如：{message:{type:"error",to:"5284750@s1.jspp.im",from:"123778@s2.jspp.im",body:"hello",error:{code:404,body:"Not found"}}}
+例如：{message:{type:"error",to:"5284750@lamfire.com",from:"123778@lamfire.com",body:"hello",error:{code:404,body:"Not found"}}}
 
 3.2 "from"属性
 消息发送者标志。总的来说这个属性为必填元素，为了对付消息欺骗，这个属性一般由服务器自动设制。客户端发送者不需要关心该属性。
 例子:
-{presence:{from:"hayash@jspp.im",to:"lamfire@jspp.im",id:"ID_98"}}
+{presence:{from:"hayash@lamfire.com",to:"lamfire@lamfire.com",id:"ID_98"}}
 
 3.3 "to"属性
 表示消息接收者。该属性是必需的。
 例子:
-{presence:{from:"hayash@jspp.im",to:"lamfire@jspp.im",id:"ID_98"}}
+{presence:{from:"hayash@lamfire.com",to:"lamfire@lamfire.com",id:"ID_98"}}
 
 3.4 "id"属性
 作为消息的唯一标志。由JSPP客户端生成，用于跟踪消息。该属性是可选的。
 例子:
-{presence:{from:"hayash@jspp.im",to:"lamfire@jspp.im",id:"ID_98"}}
+{presence:{from:"hayash@lamfire.com",to:"lamfire@lamfire.com",id:"ID_98"}}
 
 3.5 "body"属性
 该属性为消息内容。一般为明文。
 例子:
-{presence:{from:"hayash@jspp.im",to:"lamfire@jspp.im",id:"ID_98",body:"hello"}}
+{presence:{from:"hayash@lamfire.com",to:"lamfire@lamfire.com",id:"ID_98",body:"hello"}}
 
 3.6 "error"属性
 当消息类型为"error"时，该元素才被使用。该属性包括"code(错误码)","body(错误描述)"两个子属性。
 下面例子演示了向一个不存的用户发送消息后的回应包体：
-发送:{message:{id:"U5284750_1",type:"chat",to:"5284750@s1.jspp.im",from:"123778@s2.jspp.im",body:"hello"}}
-回应:{message:{id:"U5284750_1",type:"error",to:"5284750@s1.jspp.im",from:"123778@s2.jspp.im",body:"hello",error:{code:404,body:"Not found"}}}
+发送:{message:{id:"U5284750_1",type:"chat",to:"5284750@lamfire.com",from:"123778@lamfire.com",body:"hello"}}
+回应:{message:{id:"U5284750_1",type:"error",to:"5284750@lamfire.com",from:"123778@lamfire.com",body:"hello",error:{code:404,body:"Not found"}}}
 
 3.7.attach附件
 当消息包含附件时使用该元素。该属性包括"type"[image,audio,video,location]类型,"body"内容两个子属性。当type为[image,audio,video]时，body中的内容为URL地址；type为"location"时，body中的内容为地理坐标．
 下面例子演示了向一个用户发送图片的消息体：
-{message:{id:"U5284750_1",type:"chat",to:"5284750@s1.jspp.im",from:"123778@s2.jspp.im",attach:{type:"image",body:"http://www.lamfire.com/pic1.jpg"}}}
+{message:{id:"U5284750_1",type:"chat",to:"5284750@lamfire.com",from:"123778@lamfire.com",attach:{type:"image",body:"http://www.lamfire.com/pic1.jpg"}}}
 下面例子演示了向一个用户发送地理位置的消息:
-{message:{id:"U5284750_1",type:"chat",to:"5284750@s1.jspp.im",from:"123778@s2.jspp.im",attach:{type:"location",body:"23.1452135,116.265412"}}}
+{message:{id:"U5284750_1",type:"chat",to:"5284750@lamfire.com",from:"123778@lamfire.com",attach:{type:"location",body:"23.1452135,116.265412"}}}
 
 
 4. PRESENCE协议详解
@@ -121,7 +121,7 @@ type属性的有效值包括：
 当type="available"时，通常包含一个"show"元素以进一步说明可用类型；以及一个"body"(人能看懂的)描述。
 
 例子：
-{presence:{type:"available",from:"hayash@s1.jspp.im",to:"lamfire@s3.jspp.im",status:"away",body:"Stay but a little, I will come again."}}
+{presence:{type:"available",from:"hayash@lamfire.com",to:"lamfire@s3.jspp.im",status:"away",body:"Stay but a little, I will come again."}}
 
 status元素的可用值为：
 1.away(离开) 在线，但已离开座位。
@@ -133,9 +133,9 @@ status元素的可用值为：
 4.1.2. type="error"
 当一个在线状态包发送给一个不存在的实体时，或在发送在线状态请求发生一个错误时，服务器都将返回一个type="error"的 在线状态包。
 面是一个例子（注意域名的类型）：
-{presence:{type="subscribe" to="lamfire@s1.jspp.imm"}}
+{presence:{type="subscribe" to="lamfire@lamfire.comm"}}
 回复的例子：
-{presence:{to:"lamfire@s1.jspp.imm",from:"hayash@jspp.im",type:"error",error:{code:"504",desc:"Remote server timeout. Unable to deliver packet."}}}
+{presence:{to:"lamfire@lamfire.comm",from:"hayash@lamfire.com",type:"error",error:{code:"504",desc:"Remote server timeout. Unable to deliver packet."}}}
 
 4.1.3. type="probe"
 向一个特定实体（不能发送给自己）发出在线状态探测请求。服务器进行回应。
@@ -143,37 +143,37 @@ status元素的可用值为：
 注意，只有被请求者在发起请求的用户的好友列表中，并且对方不处于隐身状态时，服务器才回正确反回响应。
 在下面的例子中，我们将看到lamfire 向hayash发出一个探测请求，hayash所在服务器回复一个"状态报告".
 探测请求的例子：
-{presence:{from:"lamfire@jspp.im",to:"hayash@jspp.im",type="probe"}}
+{presence:{from:"lamfire@lamfire.com",to:"hayash@lamfire.com",type="probe"}}
 
 回复探测请求的例子：
-{presence{type="available" from:"hayash@jspp.im",to:"lamfire@jspp.im",body:"Stay but a little, I will come again.",status:"away",stamp:15310309234715}}
+{presence{type="available" from:"hayash@lamfire.com",to:"lamfire@lamfire.com",body:"Stay but a little, I will come again.",status:"away",stamp:15310309234715}}
 
 4.1.4. type="subscribe"
 申请订阅。
 例子：
-{presence:{from="lamfire@jspp.im",to:"hayash@jspp.im",type:"subscribe"}
+{presence:{from="lamfire@lamfire.com",to:"hayash@lamfire.com",type:"subscribe"}
 
 4.1.5. type="subscribed"
 表明接受了订阅请求。从现在起，当发送者的在线状态信息改变时，服务器将会把状态信息发送给接收者。
 例子：
-{presence:{from:"hayash@jspp.im",to:"lamfire@jspp.im",type:"subscribed"}}
+{presence:{from:"hayash@lamfire.com",to:"lamfire@lamfire.com",type:"subscribed"}}
 
 4.1.6. type="unavailable"
 表示目标不在线。
 例子：
-{presence:{from:"hayash@jspp.im",to:"lamfire@jspp.im",type:"unavailable",body:"Disconnnected"}}
+{presence:{from:"hayash@lamfire.com",to:"lamfire@lamfire.com",type:"unavailable",body:"Disconnnected"}}
 
 4.1.7. type="unsubscribe"
 取消在线状态信息订阅。
 例子：
-{presence:{from:"hayash@jspp.im",to:"lamfire@jspp.im",type:"unsubscribe"}}
+{presence:{from:"hayash@lamfire.com",to:"lamfire@lamfire.com",type:"unsubscribe"}}
 
 4.1.8. type="unsubscribed"
 这种类型的在线状态包有两个用途：
 1.状态订阅已被取消。
 2.拒绝一个订阅请求。服务器将不再发送在线状态信息给订阅者。
 例子：
-{presence:{ from:"lamfire@jspp.im" ,to:"hayash@jspp.im" ,type:"unsubscribed"}}
+{presence:{ from:"lamfire@lamfire.com" ,to:"hayash@lamfire.com" ,type:"unsubscribed"}}
 
 4.2. 其它属性
 
@@ -183,7 +183,7 @@ status元素的可用值为：
 4.2.2."id"属性
 为在线状态请求包配置唯一的标识。"id"属性由客户端生成，客户端用其为在线状态包的顺序号进行验证。该属性是可选的。
 例子：
-{presence:{to:"lamfire@jspp.im",id:"ID_98"}}
+{presence:{to:"lamfire@lamfire.com",id:"ID_98"}}
 
 4.2.3."to"属性
 标识接收者。该属性是必需的。
@@ -191,7 +191,7 @@ status元素的可用值为：
 {presence:{to:"675784@offline",id:"ID_86"}}
 
 服务器发给指定用户的在线状态例子：
-{presence:{to:"lamfire@jspp.im",from="hayash@jspp.im",body:"Stay but a little, I will come again.",status:"away"}}
+{presence:{to:"lamfire@lamfire.com",from="hayash@lamfire.com",body:"Stay but a little, I will come again.",status:"away"}}
 
 4.3.1."status"属性
 可选的"status"元素告诉客户端如何显示一个用户的在线状态。
@@ -268,7 +268,7 @@ SERVICE属性的"type"属性用于决定信息/查询是请求还是响应等。
 5.5.  "from"属性
 标识发送者。一般"from"属性中必须写成user@host的格式。这个属性不是必须的，而在实际应用中，都是服务器对该属性进行添加和修改（防止一些欺骗的手段），因此客户端不需要考虑它。
 例子：
-{service:{from:"lamfire@jspp.im"}}
+{service:{from:"lamfire@lamfire.com"}}
 
 5.6.  "id"属性
 表示SERVICE包唯一的标识。由客户端生成和跟踪。属性是可选的，并且不能用于系统的其它地方。
