@@ -26,15 +26,17 @@ JSPP六个通用属性：
 
 一次会话由两个平行的JSPP流组成，一个从客户端到服务器，另一个从服务器到客户端。当JSPP客户端连接上服务器时，这个客户端将发起客户端－>服务器JSPP流，同时服务器作为响应也将发起一个服务器－客户端JSPP流。所有的message,presence,service元素都被放在这个JSPP流中进行传输。
 
+* 下面来个对话的简单例子：
+
 ``` javascript
-  : 下面来个对话的简单例子：
-  : 用户ID为12345发送消息给ID为54321的用户：
-  : {message:{from:"12345@lamfire.com",to:"54321@lamfire.com",body:"hello"}}
+  用户ID为12345发送消息给ID为54321的用户：
+  {message:{from:"12345@lamfire.com",to:"54321@lamfire.com",body:"hello"}}
 ```
 
+``` javascript
 ID为54321用户将接收到消息：
 {message:{from:"12345@lamfire.com",to:"54321@lamfire.com",body:"hello"}}
-
+```
 
 # 3.MESSAGE协议详解
 MESSAGE协议是JSPP协义中三个顶级协义类型中的一个。它被定义为两个实体间互相发送消息内容的协议载体。
