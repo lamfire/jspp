@@ -542,9 +542,11 @@ key元素为客户端－服务器之间交互提供一层安全保护。
 当一个客户端发起一个与服务其之间的交互时，服务器将发送一个包含一个唯一值的key给客户端。
 客户端在请求{service:{type="set"}的消息中，包含上诉key到子元素中。这样，服务器就能识别请求者身份。
 
+``` javascript
+{service:{type="set",to:"service.lamfire.com",ns="user.set",args:{password:"123456"},key="f1e881517e9917bb815fed112d81d32b4e4b3aed"}}
+```
 
-
-就象你看到的那样，认证查询名称空间"user.auth"向服务器发送认证信息。
+就象你看到的那样，调用认证NS"user.set"向服务器发送认证KEY信息。
 
 
 
