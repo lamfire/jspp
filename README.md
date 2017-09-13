@@ -96,7 +96,7 @@ type属性的有效值包括：
 {message:{id:"U5284750_1",type:"chat",to:"5284750@lamfire.com",from:"123778@lamfire.com",attach:{type:"location",body:"23.1452135,116.265412"}}}
 
 
-4. PRESENCE协议详解
+# 4. PRESENCE协议详解
 本协议提供用户、服务器等实体的可用性信息订阅/查询协议。一个用户可以与另一个用户进行在线状态信息的同步，通信大多以服务器推送的方式进行。
 在线状态分为"available"和"unavailable",由type属性指定。"available" 状态表示可以立即收到消息。"unavailable"状态表示不能在当前时间收到消息。
 默认情况下，所有状态都默认为"available"，除非显示指定type:"unavailable"除外。"available"的更多信息通过"body"和"status"元素进行指定。
@@ -212,7 +212,7 @@ status元素的可用值为：
 
 
 
-5. 服务(SERVICE)协议
+# 5. 服务(SERVICE)协议
 主要用于远程服务调用，并且以JSON格式的数据传送请求和响应。
 
 属性列表
