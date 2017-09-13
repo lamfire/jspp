@@ -1,5 +1,5 @@
 
-# JSPP 协议说明 { #heading }
+# JSPP 协议说明
 
 
 
@@ -84,7 +84,18 @@ type属性的有效值包括：
 
 ``` javascript
 例如：
-{message:{type:"error",to:"5284750@lamfire.com",from:"123778@lamfire.com",body:"hello",error:{code:404,body:"Not found"}}}
+{
+  message: {
+    type: "error",
+    to: "5284750@lamfire.com",
+    from: "123778@lamfire.com",
+    body: "hello",
+    error: {
+      code: 404,
+      body: "Not found"
+    }
+  }
+}
 ```
 
 3.2 "from"属性
@@ -128,7 +139,19 @@ type属性的有效值包括：
 {message:{id:"U5284750_1",type:"chat",to:"5284750@lamfire.com",from:"123778@lamfire.com",body:"hello"}}
 
 回应:
-{message:{id:"U5284750_1",type:"error",to:"5284750@lamfire.com",from:"123778@lamfire.com",body:"hello",error:{code:404,body:"Not found"}}}
+{
+  message: {
+    id: "U5284750_1",
+    type: "error",
+    to: "5284750@lamfire.com",
+    from: "123778@lamfire.com",
+    body: "hello",
+    error: {
+      code: 404,
+      body: "Not found"
+    }
+  }
+}
 ```
 
 3.7.attach附件
@@ -136,10 +159,32 @@ type属性的有效值包括：
 
 ``` javascript
 下面例子演示了向一个用户发送图片的消息体：
-{message:{id:"U5284750_1",type:"chat",to:"5284750@lamfire.com",from:"123778@lamfire.com",attach:{type:"image",body:"http://www.lamfire.com/pic1.jpg"}}}
+{
+  message: {
+    id: "U5284750_1",
+    type: "chat",
+    to: "5284750@lamfire.com",
+    from: "123778@lamfire.com",
+    attach: {
+      type: "image",
+      body: "http://www.lamfire.com/pic1.jpg"
+    }
+  }
+}
 
 下面例子演示了向一个用户发送地理位置的消息:
-{message:{id:"U5284750_1",type:"chat",to:"5284750@lamfire.com",from:"123778@lamfire.com",attach:{type:"location",body:"23.1452135,116.265412"}}}
+{
+  message: {
+    id: "U5284750_1",
+    type: "chat",
+    to: "5284750@lamfire.com",
+    from: "123778@lamfire.com",
+    attach: {
+      type: "location",
+      body: "23.1452135,116.265412"
+    }
+  }
+}
 ```
 
 ### 4. PRESENCE协议详解
@@ -178,7 +223,15 @@ type属性的有效值包括：
 
 ``` javascript
 例子：
-{presence:{type:"available",from:"hayash@lamfire.com",to:"lamfire@s3.jspp.im",status:"away",body:"Stay but a little, I will come again."}}
+{
+  presence: {
+    type: "available",
+    from: "hayash@lamfire.com",
+    to: "lamfire@s3.jspp.im",
+    status: "away",
+    body: "Stay but a little, I will come again."
+  }
+}
 ```
 
 status元素的可用值为：
@@ -197,7 +250,17 @@ status元素的可用值为：
 {presence:{type="subscribe" to="lamfire@lamfire.comm"}}
 
 回复的例子：
-{presence:{to:"lamfire@lamfire.comm",from:"hayash@lamfire.com",type:"error",error:{code:"504",desc:"Remote server timeout. Unable to deliver packet."}}}
+{
+  presence: {
+    to: "lamfire@lamfire.comm",
+    from: "hayash@lamfire.com",
+    type: "error",
+    error: {
+      code: "504",
+      desc: "Remote server timeout. Unable to deliver packet."
+    }
+  }
+}
 ```
 
 4.1.3. type="probe"
@@ -211,7 +274,15 @@ status元素的可用值为：
 {presence:{from:"lamfire@lamfire.com",to:"hayash@lamfire.com",type="probe"}}
 
 回复探测请求的例子：
-{presence{type="available" from:"hayash@lamfire.com",to:"lamfire@lamfire.com",body:"Stay but a little, I will come again.",status:"away",stamp:15310309234715}}
+{
+  presence{
+    type="available"from: "hayash@lamfire.com",
+    to: "lamfire@lamfire.com",
+    body: "Stay but a little, I will come again.",
+    status: "away",
+    stamp: 15310309234715
+  }
+}
 ```
 
 4.1.4. type="subscribe"
@@ -279,7 +350,14 @@ status元素的可用值为：
 
 
 服务器发给指定用户的在线状态例子：
-{presence:{to:"lamfire@lamfire.com",from="hayash@lamfire.com",body:"Stay but a little, I will come again.",status:"away"}}
+{
+  presence: {
+    to: "lamfire@lamfire.com",
+    from="hayash@lamfire.com",
+    body: "Stay but a little, I will come again.",
+    status: "away"
+  }
+}
 ```
 
 4.3.1."status"属性
@@ -329,7 +407,22 @@ status元素的可用值为：
 
 ``` javascript
 下面是一个登陆请求所返回result例子:
-{service:{type="result",ns:"user.auth",args:{username:"lamfire",digest:"f1e881517e9917bb815fed112d81d32b4e4b3aed"},result:{id:"74Ed74362BA347653",nickname:"linfan"}}}
+{
+  service: {
+    type="result",
+    ns: "user.auth",
+    args: {
+      username: "lamfire",
+      digest: "f1e881517e9917bb815fed112d81d32b4e4b3aed"
+    },
+    result: {
+      id: "74Ed74362BA347653",
+      nickname: "linfan",
+      avatar: "http://img.lamfire.com/1.jpg",
+      token: "a1e881517e9812b6715fed112d81d4564b3a49",
+    }
+  }
+}
 ```
 
 
@@ -355,7 +448,15 @@ SERVICE属性的"type"属性用于决定信息/查询是请求还是响应等。
 
 ``` javascript
 例子：
-{service:{type="get",ns:"user.auth",args:{username:"lamfire",digest:"f1e881517e9917bb815fed112d81d32b4e4b3aed"}}}
+{
+  service: {
+    type="get",
+    ns: "user",
+    args: {
+      id: "f1e881517e9917bb815fed112d81d32b4e4b3aed"
+    }
+  }
+}
 ```
 
 5.4.3. type="result"
@@ -393,7 +494,22 @@ SERVICE属性的"type"属性用于决定信息/查询是请求还是响应等。
 
 
 响应:
-{service:{type:"result",to:"service.lamfire.com",id="ID_988",ns="user.get",args:{id:"123456"},result:{user:{...}}}}
+{
+  service: {
+    type: "result",
+    to: "service.lamfire.com",
+    id="ID_988",
+    ns="user.get",
+    args: {
+      id: "123456"
+    },
+    result: {
+      user: {
+        ...
+      }
+    }
+  }
+}
 
 ```
 
