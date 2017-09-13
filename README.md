@@ -1,7 +1,6 @@
 
-~ Center
 # JSPP 协议说明 { #heading }
-~
+
 
 
 ### 1.JSPP介绍
@@ -46,29 +45,43 @@ ID为54321用户将接收到消息：
 MESSAGE协议是JSPP协义中三个顶级协义类型中的一个。它被定义为两个实体间互相发送消息内容的协议载体。
 
 属性列表
-1.type  消息类型
-2.from  来自
-3.to    发送到
-4.id    消息ID(可选)
-5.body  消息内容
-6.error 错误(由type属性决定必要必)
-7.attach 附件(可选)
+* 1.type  消息类型
+* 2.from  来自
+* 3.to    发送到
+* 4.id    消息ID(可选)
+* 5.body  消息内容
+* 6.error 错误(由type属性决定必要必)
+* 7.attach 附件(可选)
 
 
 3.1 "type"属性
 JSPP服务器支持几种不同的消息，这些消息通过type属性来进行区分。
+
 type属性的有效值包括：
-1.type=[default]:不设置type属性，本示本消息是一个普通消息.
+
+* 1.type=[default]:不设置type属性，本示本消息是一个普通消息.
+
+``` javascript
 例如：{message:{to:"5284750@lamfire.com",body:"hello"}}
+```
 
-2.type="chat":表示消息为一个接一个的对话消息，一般显示在聊天对话界面上。
+* 2.type="chat":表示消息为一个接一个的对话消息，一般显示在聊天对话界面上。
+
+``` javascript
 例如：{message:{type:"chat",to:"5284750@lamfire.com",from:"123778@lamfire.com",body:"hello"}}
+```
 
-3.type="groupchat":表示消息为群聊消息，一般显示在聊天室对话界面上。
+* 3.type="groupchat":表示消息为群聊消息，一般显示在聊天室对话界面上。
+
+``` javascript
 例如：{message:{type:"groupchat",to:"room1@lamfire.com",from:"123778@lamfire.com",body:"hello"}}
+```
 
-4.type="error":表示消息为一个错误。
+* 4.type="error":表示消息为一个错误。
+
+``` javascript
 例如：{message:{type:"error",to:"5284750@lamfire.com",from:"123778@lamfire.com",body:"hello",error:{code:404,body:"Not found"}}}
+```
 
 3.2 "from"属性
 消息发送者标志。总的来说这个属性为必填元素，为了对付消息欺骗，这个属性一般由服务器自动设制。客户端发送者不需要关心该属性。
@@ -109,27 +122,30 @@ type属性的有效值包括：
 在线状态分为"available"和"unavailable",由type属性指定。"available" 状态表示可以立即收到消息。"unavailable"状态表示不能在当前时间收到消息。
 默认情况下，所有状态都默认为"available"，除非显示指定type:"unavailable"除外。"available"的更多信息通过"body"和"status"元素进行指定。
 在JSPP中,也常用PRESENCE来维护用户关系,比如subscribe(请求添加好友关系),unsubscribe(请求解除好友关系),subscribed(接受了好友关系),unsubscribed(拒绝或解除了好友关系)等.
+
 属性列表
-1.type  	类型
-2.from  	来自
-3.id    	消息ID(可选)
-4.to    	发送到
-5.status 	状态
-6.body  	状态描述
+
+* 1.type  	类型
+* 2.from  	来自
+* 3.id    	消息ID(可选)
+* 4.to    	发送到
+* 5.status 	状态
+* 6.body  	状态描述
 
 
 
 4.1."type"属性
 "type"属性根据不同目的来使用。除了提示其它用户本用户的可用性状态的"默认"用法外，还包括订阅、取消订阅、以及探测在线状态信息。
 下面是"type"属性的可用值：
-1.available(可用)
-2.error(错误)
-3.probe(探测)
-4.subscribe(订阅)
-5.subscribed(已订阅)
-6.unavailable(不可用)
-7.unsubscribe(取消订阅)
-8.unsubscribed(订阅已取消)
+
+* 1.available(可用)
+* 2.error(错误)
+* 3.probe(探测)
+* 4.subscribe(订阅)
+* 5.subscribed(已订阅)
+* 6.unavailable(不可用)
+* 7.unsubscribe(取消订阅)
+* 8.unsubscribed(订阅已取消)
 
 4.1.1. type="available"
 如果没有包含任何"type"属性，在线状态默认被设为 type="available"，用来表示用户在线。
@@ -139,9 +155,9 @@ type属性的有效值包括：
 {presence:{type:"available",from:"hayash@lamfire.com",to:"lamfire@s3.jspp.im",status:"away",body:"Stay but a little, I will come again."}}
 
 status元素的可用值为：
-1.away(离开) 在线，但已离开座位。
-2.chatting(聊天中) 在线并正在聊天。
-3.dnd(防打拢)  在线，但不想被打扰（"dnd"表示"do not disturb"）
+* 1.away(离开) 在线，但已离开座位。
+* 2.chatting(聊天中) 在线并正在聊天。
+* 3.dnd(防打拢)  在线，但不想被打扰（"dnd"表示"do not disturb"）
 
 "body":用户状态的描述。如，"开会中"是"away"的一个表现值，或者"忙于编码"可以是"dnd"的一个表现。
 
@@ -185,8 +201,10 @@ status元素的可用值为：
 
 4.1.8. type="unsubscribed"
 这种类型的在线状态包有两个用途：
-1.状态订阅已被取消。
-2.拒绝一个订阅请求。服务器将不再发送在线状态信息给订阅者。
+
+* 1.状态订阅已被取消。
+* 2.拒绝一个订阅请求。服务器将不再发送在线状态信息给订阅者。
+
 例子：
 {presence:{ from:"lamfire@lamfire.com" ,to:"hayash@lamfire.com" ,type:"unsubscribed"}}
 
@@ -210,10 +228,12 @@ status元素的可用值为：
 
 4.3.1."status"属性
 可选的"status"元素告诉客户端如何显示一个用户的在线状态。
+
 status元素的可用值为：
-1.away(离开) 用户或实体在线，但已离开座位。
-2.chatting(聊天中) 用户或实体在线并正在聊天。
-3.dnd(防打拢)  用户或实体在线，但不想被打扰（"dnd"表示"do not disturb"）
+
+* 1.away(离开) 用户或实体在线，但已离开座位。
+* 2.chatting(聊天中) 用户或实体在线并正在聊天。
+* 3.dnd(防打拢)  用户或实体在线，但不想被打扰（"dnd"表示"do not disturb"）
 
 4.3.2."body"属性
 用户在线状态的描述。客户端包含一些默认设置；允许提供富有个性的描述如"我在吃午饭"或者"钓鱼中"。
@@ -224,15 +244,16 @@ status元素的可用值为：
 主要用于远程服务调用，并且以JSON格式的数据传送请求和响应。
 
 属性列表
-1.ns		名称空间
-2.args  	参数
-3.result  	结果
-4.type  	类型
-5.from  	来自
-6.id    	消息ID(可选)
-7.to    	发送到
-8.error    	错误
-9.key 		密钥
+
+* 1.ns		名称空间
+* 2.args  	参数
+* 3.result  	结果
+* 4.type  	类型
+* 5.from  	来自
+* 6.id    	消息ID(可选)
+* 7.to    	发送到
+* 8.error    	错误
+* 9.key 		密钥
 
 
 
@@ -255,10 +276,11 @@ status元素的可用值为：
 5.4.    "type"属性
 SERVICE属性的"type"属性用于决定信息/查询是请求还是响应等。
 下面是"type"属性的可用值：
-1.error(错误)
-2.get(获取)
-3.result(结果)
-4.set(设置)
+
+* 1.error(错误)
+* 2.get(获取)
+* 3.result(结果)
+* 4.set(设置)
 
 5.4.1. type="error"
 表示请求失败。实际错误在"error"子元素中描述。
