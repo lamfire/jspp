@@ -1,11 +1,10 @@
-Title         : JSPP 协议说明
-Author        : lamfire
-Logo          : True
 
-[TITLE]
+~ Center
+# JSPP 协议说明 { #heading }
+~
 
 
-# 1.介绍
+### 1.JSPP介绍
 
 JSPP(JSON Messaging and Presence Protocol 基于JSON的通讯表示协议)是一个基于JSON的即时消息(IM)服务协议。它继承了XMPP协议的灵活性，可以说是XMPP协议的JSON版。因此，基于JSPP的应用具有超强的可扩展性。经过扩展以后的JSPP可以通过发送扩展的信息来处理用户的需求，以及在JSPP的顶端建立如内容发布系统和基于地址的服务等应用程序。而且，JSPP包含了针对服务器端的软件协议，使之能与另一个进行通话，这使得开发者更容易建立客户应用程序或给一个配好系统添加功能。
 
@@ -26,7 +25,7 @@ JSPP六个通用属性：
 
 
 
-# 2.JSPP数据流
+### 2.JSPP数据流
 
 
 一次会话由两个平行的JSPP流组成，一个从客户端到服务器，另一个从服务器到客户端。当JSPP客户端连接上服务器时，这个客户端将发起客户端－>服务器JSPP流，同时服务器作为响应也将发起一个服务器－客户端JSPP流。所有的message,presence,service元素都被放在这个JSPP流中进行传输。
@@ -43,7 +42,7 @@ ID为54321用户将接收到消息：
 {message:{from:"12345@lamfire.com",to:"54321@lamfire.com",body:"hello"}}
 ```
 
-# 3.MESSAGE协议详解
+### 3.MESSAGE协议详解
 MESSAGE协议是JSPP协义中三个顶级协义类型中的一个。它被定义为两个实体间互相发送消息内容的协议载体。
 
 属性列表
@@ -105,7 +104,7 @@ type属性的有效值包括：
 {message:{id:"U5284750_1",type:"chat",to:"5284750@lamfire.com",from:"123778@lamfire.com",attach:{type:"location",body:"23.1452135,116.265412"}}}
 
 
-# 4. PRESENCE协议详解
+### 4. PRESENCE协议详解
 本协议提供用户、服务器等实体的可用性信息订阅/查询协议。一个用户可以与另一个用户进行在线状态信息的同步，通信大多以服务器推送的方式进行。
 在线状态分为"available"和"unavailable",由type属性指定。"available" 状态表示可以立即收到消息。"unavailable"状态表示不能在当前时间收到消息。
 默认情况下，所有状态都默认为"available"，除非显示指定type:"unavailable"除外。"available"的更多信息通过"body"和"status"元素进行指定。
@@ -221,7 +220,7 @@ status元素的可用值为：
 
 
 
-# 5.服务(SERVICE)协议
+### 5.服务(SERVICE)协议
 主要用于远程服务调用，并且以JSON格式的数据传送请求和响应。
 
 属性列表
@@ -321,7 +320,7 @@ key元素为客户端－服务器之间交互提供一层安全保护。
 
 
 
-# 附录A 常用错误代码
+### 附录A 常用错误代码
 
 下面是JSPP中错误代码的一些简要描述。服务器在产生错误是生成这些错误代码。错误代码以HTTP规格的RFC 2616为基础定义。JSPP并没有使用所有的HTTP的错误代码，并且当JSPP错误代码与HTTP错误代码对立时，请以JSPP定义为准。
 * 错误码  描述 		说明
