@@ -138,41 +138,6 @@ class JSPPSerializer implements Serializer {
         return null;
     }
 
-
-    public SERVICE toSERVICE(String jsppString) {
-        JSON json = JSON.fromJSONString(jsppString);
-        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_SERVICE);
-        if(jspp == null){
-            return null;
-        }
-        SERVICE m = new SERVICE();
-        m.putAll(jspp);
-        return m;
-    }
-
-    public MESSAGE toMESSAGE(String jsppString) {
-        JSON json = JSON.fromJSONString(jsppString);
-        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_MESSAGE);
-        if(jspp == null){
-            return null;
-        }
-        MESSAGE m = new MESSAGE();
-        m.putAll(jspp);
-        return m;
-    }
-
-    public PRESENCE toPRESENCE(String jsppString) {
-        JSON json = JSON.fromJSONString(jsppString);
-        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
-        if(jspp == null){
-            return null;
-        }
-        PRESENCE m = new PRESENCE();
-        m.putAll(jspp);
-        return m;
-    }
-
-
     public ProtocolType getProtocolType(byte[] bytes) {
         String js = new String(bytes,CHARSET);
         JSON json = JSON.fromJSONString(js);

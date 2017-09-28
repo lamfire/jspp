@@ -36,4 +36,15 @@ public class PRESENCE extends JSPP{
         json.put(JSPP_TYPE_PREFIX_PRESENCE,this);
         return json.toJSONString();
     }
+
+    public static PRESENCE valueOf(String jsppString) {
+        JSON json = JSON.fromJSONString(jsppString);
+        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
+        if(jspp == null){
+            return null;
+        }
+        PRESENCE m = new PRESENCE();
+        m.putAll(jspp);
+        return m;
+    }
 }

@@ -77,4 +77,15 @@ public class SERVICE extends JSPP{
         json.put(JSPP_TYPE_PREFIX_SERVICE,this);
         return json.toJSONString();
     }
+
+    public static SERVICE valueOf(String jsppString) {
+        JSON json = JSON.fromJSONString(jsppString);
+        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_SERVICE);
+        if(jspp == null){
+            return null;
+        }
+        SERVICE m = new SERVICE();
+        m.putAll(jspp);
+        return m;
+    }
 }

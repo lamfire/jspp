@@ -42,4 +42,15 @@ public class MESSAGE extends JSPP{
         json.put(JSPP_TYPE_PREFIX_MESSAGE,this);
         return json.toJSONString();
     }
+
+    public static MESSAGE valueOf(String jsppString) {
+        JSON json = JSON.fromJSONString(jsppString);
+        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_MESSAGE);
+        if(jspp == null){
+            return null;
+        }
+        MESSAGE m = new MESSAGE();
+        m.putAll(jspp);
+        return m;
+    }
 }
