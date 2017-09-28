@@ -2,6 +2,7 @@ package com.lamfire.jspp.test;
 
 import com.lamfire.jspp.ATTACH;
 import com.lamfire.jspp.JSPP;
+import com.lamfire.jspp.JSPPUtils;
 import com.lamfire.jspp.MESSAGE;
 
 /**
@@ -38,5 +39,10 @@ public class JSPPSerializerTest {
         //反序列化
         MESSAGE de = (MESSAGE)JSPP.deserialize(bytes);
         System.out.println("[deserialize]:" + de.toJSONString());
+
+
+        String jsppString = JSPPUtils.toJSPPString(de);
+        System.out.println(jsppString);
+        System.out.println(JSPPUtils.parseJSPPString(jsppString));
     }
 }

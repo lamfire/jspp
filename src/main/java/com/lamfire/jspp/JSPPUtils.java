@@ -37,4 +37,12 @@ public class JSPPUtils {
     public static ProtocolType getProtocolType(JSON json){
         return JSPPSerializer.get().getProtocolType(json);
     }
+
+    public static String toJSPPString(JSPP jspp){
+       return JSPPSerializer.get().toJSPPString(jspp);
+    }
+
+    public static JSPP parseJSPPString(String jsppString){
+        return JSPPSerializer.get().parse(jsppString);
+    }
 }

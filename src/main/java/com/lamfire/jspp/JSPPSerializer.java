@@ -23,59 +23,97 @@ class JSPPSerializer implements Serializer {
     @Override
     public byte[] encode(JSPP jspp) {
         if(jspp instanceof MESSAGE){
-            return encodeMessage((MESSAGE)jspp);
+            return encode((MESSAGE)jspp);
         }
 
         if(jspp instanceof SERVICE){
-            return encodeService((SERVICE) jspp);
+            return encode((SERVICE) jspp);
         }
 
         if(jspp instanceof PRESENCE){
-            return encodePresence((PRESENCE) jspp);
+            return encode((PRESENCE) jspp);
         }
         return null;
     }
 
+    public String toJSPPString(JSPP jspp) {
+        if(jspp instanceof MESSAGE){
+            return toJSPPString((MESSAGE)jspp);
+        }
 
-    public byte[] encodeService(SERVICE service) {
+        if(jspp instanceof SERVICE){
+            return toJSPPString((SERVICE) jspp);
+        }
+
+        if(jspp instanceof PRESENCE){
+            return toJSPPString((PRESENCE) jspp);
+        }
+        return null;
+    }
+
+    public JSPP parse(String jsppString) {
+        JSON json = JSON.fromJSONString(jsppString);
+        JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_MESSAGE);
+        if(jspp != null){
+            MESSAGE m = new MESSAGE();
+            m.putAll(jspp);
+            return m;
+        }
+
+        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_SERVICE);
+        if(jspp != null){
+            SERVICE m = new SERVICE();
+            m.putAll(jspp);
+            return m;
+        }
+
+        jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
+        if(jspp != null){
+            PRESENCE m = new PRESENCE();
+            m.putAll(jspp);
+            return m;
+        }
+        return null;
+    }
+
+    public byte[] encode(SERVICE service) {
+        String js = toJSPPString(service);
+        return js.getBytes(CHARSET);
+    }
+
+    public String toJSPPString(SERVICE service) {
         JSON json = new JSON();
         json.put(JSPP.JSPP_TYPE_PREFIX_SERVICE,service);
-        String js = json.toJSONString();
-        if(LOGGER.isDebugEnabled()){
-            LOGGER.debug("[ENCODE]:" +js);
-        }
-        return js.getBytes(CHARSET);
+        return json.toJSONString();
     }
 
 
-    public byte[] encodeMessage(MESSAGE message) {
+    public byte[] encode(MESSAGE message) {
+        String js = toJSPPString(message);
+        return js.getBytes(CHARSET);
+    }
+
+    public String toJSPPString(MESSAGE message) {
         JSON json = new JSON();
         json.put(JSPP.JSPP_TYPE_PREFIX_MESSAGE,message);
-
-        String js = json.toJSONString();
-        if(LOGGER.isDebugEnabled()){
-            LOGGER.debug("[ENCODE]:" +js);
-        }
-        return js.getBytes(CHARSET);
+        return json.toJSONString();
     }
 
 
-    public byte[] encodePresence(PRESENCE presence) {
+    public byte[] encode(PRESENCE presence) {
+        String js = toJSPPString(presence);
+        return js.getBytes(CHARSET);
+    }
+
+    public String toJSPPString(PRESENCE presence) {
         JSON json = new JSON();
         json.put(JSPP.JSPP_TYPE_PREFIX_PRESENCE,presence);
-        String js = json.toJSONString();
-        if(LOGGER.isDebugEnabled()){
-            LOGGER.debug("[ENCODE]:" +js);
-        }
-        return js.getBytes(CHARSET);
+        return json.toJSONString();
     }
 
 
     public JSPP decode(byte[] bytes) {
         String js = new String(bytes,CHARSET);
-        if(LOGGER.isDebugEnabled()){
-            LOGGER.debug("[DECODE]:" +js);
-        }
         JSON json = JSON.fromJSONString(js);
         JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_MESSAGE);
         if(jspp != null){
@@ -101,12 +139,8 @@ class JSPPSerializer implements Serializer {
     }
 
 
-    public SERVICE decodeService(byte[] bytes) {
-        String js = new String(bytes,CHARSET);
-        if(LOGGER.isDebugEnabled()){
-            LOGGER.debug("[DECODE]:" +js);
-        }
-        JSON json = JSON.fromJSONString(js);
+    public SERVICE toSERVICE(String jsppString) {
+        JSON json = JSON.fromJSONString(jsppString);
         JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_SERVICE);
         if(jspp == null){
             return null;
@@ -116,13 +150,8 @@ class JSPPSerializer implements Serializer {
         return m;
     }
 
-
-    public MESSAGE decodeMessage(byte[] bytes) {
-        String js = new String(bytes,CHARSET);
-        if(LOGGER.isDebugEnabled()){
-            LOGGER.debug("[DECODE]:" +js);
-        }
-        JSON json = JSON.fromJSONString(js);
+    public MESSAGE toMESSAGE(String jsppString) {
+        JSON json = JSON.fromJSONString(jsppString);
         JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_MESSAGE);
         if(jspp == null){
             return null;
@@ -132,13 +161,8 @@ class JSPPSerializer implements Serializer {
         return m;
     }
 
-
-    public PRESENCE decodePresence(byte[] bytes) {
-        String js = new String(bytes,CHARSET);
-        if(LOGGER.isDebugEnabled()){
-            LOGGER.debug("[DECODE]:" +js);
-        }
-        JSON json = JSON.fromJSONString(js);
+    public PRESENCE toPRESENCE(String jsppString) {
+        JSON json = JSON.fromJSONString(jsppString);
         JSON jspp = (JSON)json.get(JSPP.JSPP_TYPE_PREFIX_PRESENCE);
         if(jspp == null){
             return null;

@@ -12,7 +12,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public abstract class JSPP extends JSON {
-    private static Serializer serializer = new JSPPSerializer();
+    private static final JSPPSerializer serializer = new JSPPSerializer();
     public static final String JSPP_TYPE_PREFIX_SERVICE = "service";
     public static final String JSPP_TYPE_PREFIX_MESSAGE = "message";
     public static final String JSPP_TYPE_PREFIX_PRESENCE = "presence";
@@ -100,4 +100,5 @@ public abstract class JSPP extends JSON {
     public static JSPP deserialize(byte[] bytes){
           return serializer.decode(bytes);
     }
+
 }
